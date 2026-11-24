@@ -54,7 +54,7 @@ The super admin is created from your variables on the first start, so nobody can
 
 **Scaling and versions.** Add worker replicas for heavy import or export loads; keep one web replica unless you also share sessions through Redis. The image is pinned by digest in `services/nocodb/Dockerfile`. To upgrade, change the tag and digest to a newer release, back up Postgres and redeploy; migrations run on start.
 
-**Resources.** Measured idle RAM is in TEMPLATE.md in the repository.
+**Resources.** Measured idle on Railway: NocoDB 0.6 GB, worker 0.3–0.6 GB, Postgres 0.07 GB, Redis 0.03 GB; about 1–1.3 GB in total, roughly $10–15 per month plus Bucket storage. Hobby is recommended (the Trial plan's 1 GB per service leaves little headroom).
 
 **License.** NocoDB is published under the Sustainable Use License (fair-code, since January 2026): you may use and modify it for your own internal business purposes or non-commercial use; you may not sell it or offer it to others as a paid service. This is a community template; it is not affiliated with NocoDB Inc.
 

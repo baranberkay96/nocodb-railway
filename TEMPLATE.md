@@ -47,15 +47,25 @@ Version label: NocoDB uses calendar versions (`2026.10.2`); the listing names th
 
 ## Resources
 
-To be measured on the test deploy (see the report).
+Measured on Railway (2026-11-24, after a base, table, attachment upload and a base duplication job):
+
+| Service | Idle RAM | Peak seen | CPU idle |
+|---|---|---|---|
+| NocoDB | 0.59 GB | 0.80 GB | < 0.01 vCPU |
+| NocoDB Worker | 0.27–0.60 GB | 0.81 GB | < 0.01 |
+| Postgres | 0.07 GB | 0.07 GB | < 0.01 |
+| Redis | 0.03 GB | 0.03 GB | < 0.01 |
+
+Total ≈ 1.0–1.3 GB idle → ≈ $10–13/month idle RAM plus Bucket storage. Services stay under Trial's 1 GB limit in the test, with little headroom; Hobby recommended.
 
 ## Verification checklist
 
-- [ ] All services SUCCESS; `/api/v1/health` 200.
-- [ ] Sign in with the admin variables; create a base, table and record; upload an attachment (Bucket, signed URL).
-- [ ] Stranger sign-up refused (invite-only).
-- [ ] A CSV import or export runs on the worker.
-- [ ] Short `NC_ADMIN_PASSWORD` / bad `NC_ADMIN_EMAIL` do not fail the deploy.
+- [x] All services SUCCESS; `/api/v1/health` 200 (first run: `NC_REDIS_URL` with `?family=0` crashed NocoDB's Bull queue with `Connection is closed`; plain URL fixed it).
+- [x] Super admin sign-in with the variables; `invite_only_signup: true` set by the start helper.
+- [x] Base, table (text + attachment), record; attachment uploaded to the Railway Bucket; signed URL 200 image/png, raw object URL 403 (private).
+- [x] Stranger sign-up refused ("Not allowed to signup, contact super admin").
+- [x] Base duplication job (Redis job queue) completed.
+- [x] Odd values (`NC_ADMIN_PASSWORD=abc`, `NC_ADMIN_EMAIL=Not An Email`): SUCCESS, warnings logged, login locked as designed.
 
 ## Open questions
 
