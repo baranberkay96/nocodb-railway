@@ -57,7 +57,7 @@
           "required": false
         },
         "NC_REDIS_URL": {
-          "defaultValue": "${{Redis.REDIS_URL}}?family=0",
+          "defaultValue": "${{Redis.REDIS_URL}}",
           "description": "Redis for cache and the job queue shared with the worker.",
           "required": false
         },

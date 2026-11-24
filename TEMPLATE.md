@@ -36,7 +36,7 @@ Version label: NocoDB uses calendar versions (`2026.10.2`); the listing names th
 2. **Invite-only sign-up:** `railway-settings.mjs` signs in as the super admin once `/api/v1/health` answers and sets `invite_only_signup` (an app setting stored in the database, not an env var). Opt out with `NC_INVITE_ONLY_SIGNUP=false`.
 3. **Attachments in a private Railway Bucket** (`NC_S3_*`, virtual-hosted URLs) with `NC_SECURE_ATTACHMENTS=true` (signed URLs), so the worker and web share files without a shared volume.
 4. **Deploy-form values (8.29):** NocoDB exits on an invalid admin e-mail or a password under 8 characters; the start script falls back to `admin@example.com` or locks the login with a random password and logs how to fix it. Empty optional variables are dropped; a bad `NC_PUBLIC_URL` falls back to the Railway domain.
-5. Postgres and Redis stay private (no TCP proxy); Redis URL with `?family=0`.
+5. Postgres and Redis stay private (no TCP proxy). `NC_REDIS_URL` is the plain Redis URL: with `?family=0` NocoDB's Bull queue failed with `Connection is closed` (tested).
 
 ## Improvements over market templates
 
