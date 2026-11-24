@@ -1,5 +1,7 @@
 # Deploy and Host NocoDB with Railway
 
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/nocodb-202610-airtable-alternative-postg?referralCode=20H68q)
+
 NocoDB turns a PostgreSQL database into a collaborative spreadsheet: grids, forms, kanban, gallery and calendar views, plus REST APIs for every table. This template runs NocoDB 2026.10 with a background job worker, PostgreSQL 18, Redis and a Railway Bucket for attachments.
 
 ## About Hosting NocoDB
